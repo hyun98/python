@@ -1,0 +1,31 @@
+{% block content %}
+<div id="id01" class="modal">
+  
+  <form class="modal-content animate" action="{% url 'common:login' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+    {% include "form_errors.html" %}
+    <div class="log-container">
+      <label for="username"><b>ID</b></label>
+      <input type="text" placeholder="Enter Username" name="username" id="username" 
+      value="{{ form.username.value|default_if_none:'' }}">
+
+      <label for="password"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password" 
+      value="{{ form.password.value|default_if_none:'' }}">
+      
+      <button type="submit">Login</button>
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+      <span style="cursor: pointer; float: right;"><a href="{% url 'common:signup' %}">Create an account</a></span>
+    </div>
+  
+    
+    <div class="log-container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+      <span class="psw">Forgot <a href="{% url 'common:signup' %}">password?</a></span>
+    </div>
+  </form>
+</div>
+{% endblock  %}
